@@ -90,7 +90,7 @@ function Opening() {
 
   const openWhatsappMessage = (payload) => {
     const message = [
-      "☀️ Date Request",
+      "❤️ Date Request",
       `Destination: ${payload.where}`,
       `When: ${formatDateValue(payload.when)}`,
       "I can't wait for this sunny date.",
