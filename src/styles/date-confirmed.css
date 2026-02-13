@@ -1,0 +1,145 @@
+.confirmed-screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+
+.confirmed-card {
+  width: min(760px, 100%);
+  background: var(--paper);
+  border: var(--border-width) solid var(--ink);
+  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.1);
+  padding: clamp(1.3rem, 4vw, 2.5rem);
+  text-align: center;
+  animation: popIn 0.4s ease;
+  position: relative;
+}
+
+.confirmed-toast {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  z-index: 99999;
+  border: var(--border-width) solid var(--ink);
+  background: var(--lemon-soft);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.14);
+  padding: 0.4rem 1rem;
+  font-family: "Gloria Hallelujah", cursive;
+  font-size: 1.1rem;
+  animation: toastDrop 0.45s ease;
+}
+
+.confirmed-toast-exit {
+  animation: toastOutUp 0.35s ease forwards;
+}
+
+@keyframes toastDrop {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes toastOutUp {
+  from {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-26px);
+  }
+}
+
+.confirmed-title {
+  margin: 0.8rem 0 0;
+  font-family: "Gloria Hallelujah", cursive;
+  font-size: clamp(2.2rem, 8vw, 4.4rem);
+  line-height: 0.96;
+}
+
+.confirmed-title::after {
+  content: "";
+  display: block;
+  width: min(500px, 86%);
+  height: 0.9rem;
+  margin: -0.2rem auto 0;
+  border-radius: 4px;
+  background: var(--lemon-yellow);
+}
+
+.confirmed-text {
+  margin: 3rem auto 2.2rem;
+  max-width: 450px;
+  font-size: 1.9rem;
+}
+
+.confirmed-calendar {
+  width: min(340px, 100%);
+  margin: 0 auto;
+  border: var(--border-width) solid var(--ink);
+  border-radius: 10px;
+  background: #f3f5f8;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.08);
+  padding: 0.8rem;
+  transform: rotate(-1.5deg);
+}
+
+.calendar-heading {
+  margin: 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--ink);
+  font-size: 1.7rem;
+  font-family: "Gloria Hallelujah", cursive;
+}
+
+.calendar-grid {
+  margin-top: 0.7rem;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.38rem;
+}
+
+.calendar-day {
+  min-height: 1.8rem;
+  display: grid;
+  place-items: center;
+  font-size: 1.05rem;
+}
+
+.calendar-day-selected {
+  border: 3px solid #ff4d2d;
+  border-radius: 999px;
+}
+
+.calendar-location {
+  margin: 0.8rem 0 0;
+  padding-top: 0.7rem;
+  border-top: 2px dashed var(--muted);
+  font-size: 1.9rem;
+  font-family: "Sue Ellen Francisco", cursive;
+}
+
+.calendar-date {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.confirmed-note {
+  margin: 1rem 0 0.6rem;
+  font-size: 1.45rem;
+}
+
+.confirmed-link {
+  font-size: 1.4rem;
+}

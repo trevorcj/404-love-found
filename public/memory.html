@@ -1,0 +1,415 @@
+<html lang="en" vid="0">
+  <head vid="1">
+    <meta charset="UTF-8" vid="2" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+      vid="3" />
+    <title vid="4">Our Memory Scrapbook</title>
+    <style vid="5">
+      @import url("https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Indie+Flower&family=Sue+Ellen+Francisco&display=swap");
+
+      :root {
+        --bg-mint: #fef9e7;
+        --lemon-yellow: #ffd93d;
+        --lemon-dark: #ff8400;
+        --paper: #fffcf5;
+        --ink: #181818;
+        --border-width: 2.5px;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: var(--bg-mint);
+        font-family: "Indie Flower", cursive;
+        color: var(--ink);
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+      }
+
+      .scrapbook-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 4rem 2rem;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      .scrapbook-header {
+        text-align: center;
+        margin-bottom: 4rem;
+        position: relative;
+      }
+
+      h1 {
+        font-family: "Gloria Hallelujah", cursive;
+        font-size: 3.5rem;
+        margin: 0;
+        display: inline-block;
+        position: relative;
+        transform: rotate(-1deg);
+      }
+
+      h1 .highlight {
+        position: relative;
+        z-index: 1;
+      }
+
+      h1 .highlight::after {
+        content: "";
+        position: absolute;
+        bottom: 5px;
+        left: -5%;
+        width: 110%;
+        height: 30px;
+        background: var(--lemon-yellow);
+        z-index: -1;
+        border-radius: 4px;
+        transform: skew(-15deg) rotate(1deg);
+        opacity: 0.8;
+      }
+
+      .back-link {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: "Gloria Hallelujah", cursive;
+        text-decoration: none;
+        color: var(--ink);
+        font-size: 1.2rem;
+        border-bottom: 2px solid var(--ink);
+      }
+
+      .memory-board {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4rem 2rem;
+        padding: 2rem;
+        background: var(--paper);
+        border: var(--border-width) solid var(--ink);
+        border-radius: 5px 120px 15px 155px / 155px 15px 120px 5px;
+        box-shadow: 15px 15px 0px rgba(0, 0, 0, 0.05);
+        position: relative;
+      }
+
+      .polaroid {
+        background: white;
+        padding: 1rem 1rem 3.5rem 1rem;
+        border: var(--border-width) solid var(--ink);
+        box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .polaroid:nth-child(3n + 1) {
+        transform: rotate(-2deg);
+      }
+      .polaroid:nth-child(3n + 2) {
+        transform: rotate(3deg);
+      }
+      .polaroid:nth-child(3n + 3) {
+        transform: rotate(-1.5deg);
+      }
+
+      .polaroid:hover {
+        transform: scale(1.05) rotate(0deg) !important;
+        box-shadow: 12px 12px 0px rgba(0, 0, 0, 0.08);
+        z-index: 20;
+      }
+
+      .polaroid-img {
+        background-color: #fefef5;
+        aspect-ratio: 1/1;
+        width: 100%;
+        border: 1px solid #ddd;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .polaroid-caption {
+        font-family: "Sue Ellen Francisco", cursive;
+        font-size: 1.8rem;
+        color: #333;
+        text-align: center;
+        line-height: 1;
+      }
+
+      .tape {
+        position: absolute;
+        width: 80px;
+        height: 30px;
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(1px);
+        border-left: 1px dashed rgba(0, 0, 0, 0.1);
+        border-right: 1px dashed rgba(0, 0, 0, 0.1);
+        z-index: 10;
+      }
+
+      .tape-top {
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%) rotate(-2deg);
+      }
+
+      .sticker {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        pointer-events: none;
+      }
+
+      .sticker-sun {
+        top: -20px;
+        right: -20px;
+        transform: rotate(15deg);
+      }
+      .sticker-heart {
+        bottom: 10px;
+        left: -20px;
+        transform: rotate(-10deg);
+      }
+      .sticker-star {
+        top: 40%;
+        right: -30px;
+        transform: rotate(5deg);
+      }
+
+      .doodle-arrow {
+        position: absolute;
+        width: 100px;
+        filter: opacity(0.6);
+      }
+
+      @media (max-width: 900px) {
+        .memory-board {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .memory-board {
+          grid-template-columns: 1fr;
+        }
+        .back-link {
+          position: static;
+          display: block;
+          margin-bottom: 1rem;
+        }
+      }
+
+      .footer-note {
+        text-align: center;
+        margin-top: 4rem;
+        font-family: "Gloria Hallelujah", cursive;
+        font-size: 1.5rem;
+      }
+
+      .footer-note span {
+        color: #ff4b2b;
+      }
+    </style>
+  </head>
+  <body vid="6">
+    <div class="scrapbook-container" vid="7">
+      <header class="scrapbook-header" vid="8">
+        <a href="/" target="_top" class="back-link" vid="9">← Back to Letter</a>
+        <h1 vid="10">
+          Our <span class="highlight" vid="11">Sunshine Scrapbook</span>
+        </h1>
+      </header>
+
+      <div class="memory-board" vid="12">
+        <div class="sticker sticker-sun" vid="13">
+          <svg viewBox="0 0 100 100" vid="14">
+            <circle
+              cx="50"
+              cy="50"
+              r="20"
+              fill="var(--lemon-yellow)"
+              stroke="var(--ink)"
+              stroke-width="2"
+              vid="15"></circle>
+            <g stroke="var(--ink)" stroke-width="3" vid="16">
+              <line x1="50" y1="10" x2="50" y2="25" vid="17"></line>
+              <line x1="50" y1="75" x2="50" y2="90" vid="18"></line>
+              <line x1="10" y1="50" x2="25" y2="50" vid="19"></line>
+              <line x1="75" y1="50" x2="90" y2="50" vid="20"></line>
+              <line x1="22" y1="22" x2="32" y2="32" vid="21"></line>
+              <line x1="68" y1="68" x2="78" y2="78" vid="22"></line>
+              <line x1="22" y1="78" x2="32" y2="68" vid="23"></line>
+              <line x1="68" y1="22" x2="78" y2="32" vid="24"></line>
+            </g>
+          </svg>
+        </div>
+
+        <div class="polaroid" vid="25">
+          <div class="tape tape-top" vid="26"></div>
+          <div class="polaroid-img" vid="27">
+            <svg
+              width="80"
+              height="80"
+              viewBox="0 0 100 100"
+              fill="#E3F2FD"
+              vid="28">
+              <path
+                d="M10,80 Q30,50 50,70 T90,40"
+                stroke="#181818"
+                stroke-width="2"
+                fill="none"
+                vid="29"></path>
+              <circle cx="75" cy="25" r="8" fill="#FFD93D" vid="30"></circle>
+            </svg>
+          </div>
+          <div class="polaroid-caption" vid="31">The first coffee run</div>
+        </div>
+
+        <div class="polaroid" vid="32">
+          <div class="polaroid-img" vid="33">
+            <svg
+              width="80"
+              height="80"
+              viewBox="0 0 100 100"
+              fill="#FFEBEE"
+              vid="34">
+              <path
+                d="M50 85 C50 85 15 60 15 35 C15 20 30 15 40 25 C45 30 50 35 50 35 C50 35 55 30 60 25 C70 15 85 20 85 35 C85 60 50 85 50 85 Z"
+                fill="#FF8A80"
+                stroke="#181818"
+                stroke-width="2"
+                vid="35"></path>
+            </svg>
+          </div>
+          <div class="polaroid-caption" vid="36">Library whispers</div>
+        </div>
+
+        <div class="polaroid" vid="37">
+          <div
+            class="tape tape-top"
+            style="transform: translateX(-50%) rotate(5deg)"
+            vid="38"></div>
+          <div class="polaroid-img" vid="39">
+            <svg width="80" height="80" viewBox="0 0 100 100" vid="40">
+              <rect
+                x="20"
+                y="30"
+                width="60"
+                height="40"
+                rx="2"
+                fill="#CFD8DC"
+                stroke="#181818"
+                stroke-width="2"
+                vid="41"></rect>
+              <circle
+                cx="50"
+                cy="50"
+                r="10"
+                fill="white"
+                stroke="#181818"
+                stroke-width="2"
+                vid="42"></circle>
+            </svg>
+          </div>
+          <div class="polaroid-caption" vid="43">Museum Sundays</div>
+        </div>
+
+        <div class="polaroid" vid="44">
+          <div class="polaroid-img" vid="45">
+            <svg width="80" height="80" viewBox="0 0 100 100" vid="46">
+              <path
+                d="M30,70 L50,30 L70,70"
+                fill="#C8E6C9"
+                stroke="#181818"
+                stroke-width="2"
+                vid="47"></path>
+              <circle cx="50" cy="20" r="5" fill="#FFD93D" vid="48"></circle>
+            </svg>
+          </div>
+          <div class="polaroid-caption" vid="49">Park Bench Talks</div>
+          <div class="sticker sticker-heart" vid="50">
+            <svg viewBox="0 0 100 100" vid="51">
+              <path
+                d="M50 80 C50 80 20 60 20 40 C20 30 30 25 40 30 C45 33 50 38 50 38 C50 38 55 33 60 30 C70 25 80 30 80 40 C80 60 50 80 50 80 Z"
+                fill="#FF4B2B"
+                stroke="#181818"
+                stroke-width="3"
+                vid="52"></path>
+            </svg>
+          </div>
+        </div>
+
+        <div class="polaroid" vid="53">
+          <div class="tape tape-top" vid="54"></div>
+          <div class="polaroid-img" vid="55">
+            <svg width="80" height="80" viewBox="0 0 100 100" vid="56">
+              <path
+                d="M20,50 Q50,10 80,50"
+                stroke="#181818"
+                stroke-width="3"
+                fill="none"
+                vid="57"></path>
+              <circle cx="35" cy="45" r="3" fill="#181818" vid="58"></circle>
+              <circle cx="65" cy="45" r="3" fill="#181818" vid="59"></circle>
+              <path
+                d="M40,60 Q50,70 60,60"
+                stroke="#181818"
+                stroke-width="2"
+                fill="none"
+                vid="60"></path>
+            </svg>
+          </div>
+          <div class="polaroid-caption" vid="61">Inside Jokes</div>
+        </div>
+
+        <div class="polaroid" vid="62">
+          <div class="polaroid-img" vid="63">
+            <svg width="80" height="80" viewBox="0 0 100 100" vid="64">
+              <path
+                d="M10,50 L90,50 M50,10 L50,90"
+                stroke="#FFE0B2"
+                stroke-width="8"
+                vid="65"></path>
+              <text x="35" y="55" font-family="Arial" font-size="20" vid="66">
+                ✨
+              </text>
+            </svg>
+          </div>
+          <div class="polaroid-caption" vid="67">Just Being Us</div>
+        </div>
+
+        <div class="sticker sticker-star" vid="68">
+          <svg viewBox="0 0 100 100" vid="69">
+            <path
+              d="M50 10 L61 38 L91 38 L67 56 L76 84 L50 66 L24 84 L33 56 L9 38 L39 38 Z"
+              fill="#FFD93D"
+              stroke="#181818"
+              stroke-width="3"
+              vid="70"></path>
+          </svg>
+        </div>
+      </div>
+
+      <div class="footer-note" vid="71">
+        Keep shining, babe. There are so many pages left to fill.
+        <span vid="72">❤</span>
+      </div>
+    </div>
+
+    <script vid="73">
+      const cards = document.querySelectorAll(".polaroid");
+      cards.forEach((card) => {
+        card.addEventListener("mouseenter", () => {
+          const rotation = Math.random() * 6 - 3;
+          card.style.transform = `scale(1.08) rotate(${rotation}deg)`;
+        });
+        card.addEventListener("mouseleave", () => {
+          card.style.transform = "";
+        });
+      });
+    </script>
+  </body>
+</html>

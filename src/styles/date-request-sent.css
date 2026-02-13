@@ -1,0 +1,97 @@
+.request-screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.4rem;
+}
+
+.request-card {
+  width: min(560px, 100%);
+  background: var(--paper);
+  border: var(--border-width) solid var(--ink);
+  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.1);
+  padding: clamp(1.2rem, 4vw, 2.2rem);
+  text-align: center;
+  position: relative;
+  animation: popIn 0.4s ease;
+}
+
+.request-face {
+  font-size: 3.1rem;
+}
+
+.request-title {
+  margin: 0.2rem 0;
+  font-size: clamp(2.2rem, 8vw, 3.8rem);
+  line-height: 1.02;
+  font-family: "Gloria Hallelujah", cursive;
+}
+
+.request-title span {
+  background: var(--lemon-soft);
+  padding: 0 0.3rem;
+}
+
+.request-subtitle {
+  margin: 0 0 1rem;
+  font-size: 1.6rem;
+}
+
+.request-summary {
+  border: var(--border-width) solid var(--ink);
+  border-radius: 10px;
+  background: #f4f4f6;
+  padding: 1rem;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.08);
+}
+
+.request-label {
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+  font-size: 1.2rem;
+}
+
+.request-value {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.request-actions {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.request-btn {
+  border: var(--border-width) solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+  text-decoration: none;
+  font-family: "Gloria Hallelujah", cursive;
+  font-size: 1.6rem;
+  padding: 0.5rem;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.request-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.request-btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--ink);
+}
+
+.request-btn-primary {
+  background: var(--lemon-soft);
+}
+
+.request-btn-secondary {
+  background: #fff;
+}
+
+.request-footer {
+  margin: 1rem 0 0;
+  color: var(--muted);
+  font-size: 1.35rem;
+}
